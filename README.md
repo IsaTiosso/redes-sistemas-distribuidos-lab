@@ -113,3 +113,27 @@ git clone <repo-do-grupo> && cd <repo> && make up E=2 && make verificar E=2
 
 Os roteiros imprimem o valor observado em cada ponto, não só passou/falhou —
 dá para corrigir lendo a saída.
+
+## Entrega 1 - Plano de Endereçamento
+
+### Configuração de Rede
+
+*   **Segmento A:** `10.0.10.0/24` (Capacidade: 254 hosts utilizáveis)
+*   **Segmento B:** `10.0.20.0/24` (Capacidade: 254 hosts utilizáveis)
+
+### Atribuição de IPs
+
+*   **e1-host-a1:** `10.0.10.10`
+*   **e1-host-a2:** `10.0.10.11`
+*   **e1-srv-a:** `10.0.10.20`
+*   **e1-host-b1:** `10.0.20.10`
+*   **e1-host-b2:** `10.0.20.11`
+
+### Questões Teóricas
+
+1.  **Por que os endereços .0 e .255 não servem para máquinas?**
+    O endereço `.0` é reservado para identificar a rede (Network Address) e o `.255` é o endereço de difusão (Broadcast), usado para enviar mensagens a todos os nós da rede.
+2.  **Quantos hosts cabem em uma rede /24?**
+    Cabem 254 hosts ($2^8 - 2$).
+3.  **Por que o segmento A não alcança o segmento B?**
+    Porque não há um roteador (gateway) configurado para encaminhar pacotes entre as duas sub-redes distintas. Sem um roteador no caminho, o host de origem não sabe como enviar o pacote para fora de sua rede local, resultando no erro `Network is unreachable`.
