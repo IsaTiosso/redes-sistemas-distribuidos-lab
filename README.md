@@ -137,3 +137,6 @@ dá para corrigir lendo a saída.
     Cabem 254 hosts ($2^8 - 2$).
 3.  **Por que o segmento A não alcança o segmento B?**
     Porque não há um roteador (gateway) configurado para encaminhar pacotes entre as duas sub-redes distintas. Sem um roteador no caminho, o host de origem não sabe como enviar o pacote para fora de sua rede local, resultando no erro `Network is unreachable`.
+
+4.  **Por que o MAC precisa mudar se o IP não muda?**
+     O IP (Camada 3) é o endereço lógico e global de ponta a ponta; por isso, ele atravessa o roteador inalterado (apenas com o TTL decrementado). Já o MAC (Camada 2) é um endereço físico e estritamente local (válido apenas dentro de um mesmo segmento de rede). Como o roteador interliga redes diferentes, o quadro Ethernet original é completamente descartado em cada salto, e um novo quadro é gerado para o próximo enlace. Em resumo: o IP garante a rota lógica global de ponta a ponta, enquanto o MAC é reescrito a cada salto para viabilizar a entrega física local.
