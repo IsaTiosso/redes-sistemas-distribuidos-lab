@@ -129,14 +129,13 @@ dá para corrigir lendo a saída.
 *   **e1-host-b1:** `10.0.20.10`
 *   **e1-host-b2:** `10.0.20.11`
 
-### Questões Teóricas
+### Questões Teóricas Referente as Entregas 
 
-1.  **Por que os endereços .0 e .255 não servem para máquinas?**
-    O endereço `.0` é reservado para identificar a rede (Network Address) e o `.255` é o endereço de difusão (Broadcast), usado para enviar mensagens a todos os nós da rede.
-2.  **Quantos hosts cabem em uma rede /24?**
-    Cabem 254 hosts ($2^8 - 2$).
-3.  **Por que o segmento A não alcança o segmento B?**
+1.  **Por que o segmento A não alcança o segmento B?**
     Porque não há um roteador (gateway) configurado para encaminhar pacotes entre as duas sub-redes distintas. Sem um roteador no caminho, o host de origem não sabe como enviar o pacote para fora de sua rede local, resultando no erro `Network is unreachable`.
 
-4.  **Por que o MAC precisa mudar se o IP não muda?**
+2.  **Por que o MAC precisa mudar se o IP não muda?**
      O IP (Camada 3) é o endereço lógico e global de ponta a ponta; por isso, ele atravessa o roteador inalterado (apenas com o TTL decrementado). Já o MAC (Camada 2) é um endereço físico e estritamente local (válido apenas dentro de um mesmo segmento de rede). Como o roteador interliga redes diferentes, o quadro Ethernet original é completamente descartado em cada salto, e um novo quadro é gerado para o próximo enlace. Em resumo: o IP garante a rota lógica global de ponta a ponta, enquanto o MAC é reescrito a cada salto para viabilizar a entrega física local.
+
+3. **o cliente de vocês consegue distinguir uma réplica morta de uma réplica particionada? Se não consegue, isso é um    problema? ?**
+    Não, o cliente não consegue distinguir, pois ambas as situações resultam em timeout ou falha de conexão. Para este laboratório, não é um problema, já que o objetivo de alta disponibilidade (redirecionar o tráfego para uma réplica ativa) é plenamente atingido. Porém, em sistemas reais de missão crítica, isso pode dificultar diagnósticos automatizados e o monitoramento de infraestrutura.
